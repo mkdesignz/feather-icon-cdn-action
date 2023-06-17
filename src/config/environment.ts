@@ -7,7 +7,6 @@ import helmet from 'helmet';
 export const environment = express();
 environment.use(helmet({
   hidePoweredBy: true,
-  hsts: true,
   noSniff: true,
   crossOriginResourcePolicy: false // todo: make an actual policy
 }));
