@@ -2,10 +2,10 @@
   "name": "icon-feathers-cdn",
   "version": "1.0.0",
   "description": "",
-  "main": "server.js",
+  "main": "index.js",
   "scripts": {
-    "start": "node dist/server.js",
-    "dev": "npm run build && concurrently -k -n 'TypeScript,Node' -c 'yellow.bold,cyan.bold' 'npm run watch-ts' 'nodemon ./dist/server.js' -i true --default-input-target 1",
+    "start": "node dist/index.js",
+    "dev": "npm run build && concurrently -k -n 'TypeScript,Node' -c 'yellow.bold,cyan.bold' 'npm run watch-ts' 'nodemon ./dist/index.js' -i true --default-input-target 1",
     "dev:verbose": "nodemon --vebose --watch src/ --exec 'npm run build && npm start'  -e ts",
     "watch-ts": "tsc -w && npm run copy-files",
     "build": "tsc --build && npm run copy-files",
