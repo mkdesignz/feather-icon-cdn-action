@@ -2,10 +2,10 @@
   "name": "icon-feathers-cdn",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "dist/server.js",
   "scripts": {
-    "start": "node dist/index.js",
-    "dev": "npm run build && concurrently -k -n 'TypeScript,Node' -c 'yellow.bold,cyan.bold' 'npm run watch-ts' 'nodemon ./dist/index.js' -i true --default-input-target 1",
+    "start": "node dist/server.js",
+    "dev": "npm run build && concurrently -k -n 'TypeScript,Node' -c 'yellow.bold,cyan.bold' 'npm run watch-ts' 'nodemon ./dist/server.js' -i true --default-input-target 1",
     "dev:verbose": "nodemon --vebose --watch src/ --exec 'npm run build && npm start'  -e ts",
     "watch-ts": "tsc -w && npm run copy-files",
     "build": "tsc --build && npm run copy-files",
@@ -66,7 +66,6 @@
     "morgan": "^1.10.0",
     "mysql": "^2.18.1",
     "pug": "^3.0.2",
-    "snyk": "^1.996.0",
-    "socket.io": "^4.5.0"
+    "snyk": "^1.996.0"
   }
 }
