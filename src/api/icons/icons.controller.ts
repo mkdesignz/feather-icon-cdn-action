@@ -5,7 +5,17 @@ import { icons } from "feather-icons"
 export class IconsController {
   constructor() {}
 
-  public get(req: Request, res: Response): unknown {
+  public getAllIcons(_req: Request, res: Response): unknown {
+    const allIcon = []
+    for (const icon in icons) {
+      allIcon.push({
+        name: icon,
+        icon: icons[icon].toSvg()
+      });
+    }
+    return res.status(200).send(JSON.parse(JSON.stringify(allIcon)));
+  }
+  public getSingleIcon(req: Request, res: Response): unknown {
     const { iconsName} = req.params;
     try {
       const icon = icons[iconsName].toSvg();
@@ -14,10 +24,8 @@ export class IconsController {
         .send(icon);
     } catch (e) {
       return res.status(404).send({
-        error: {
-          message: "Icon Doesn't exist",
-          status: 404
-        }
+        message: "Icon Doesn't exist",
+        status: 404
       });
     }
   }
