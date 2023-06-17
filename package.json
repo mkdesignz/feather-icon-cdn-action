@@ -7,8 +7,8 @@
     "start": "node dist/server.js",
     "dev": "npm run build && concurrently -k -n 'TypeScript,Node' -c 'yellow.bold,cyan.bold' 'npm run watch-ts' 'nodemon ./dist/server.js' -i true --default-input-target 1",
     "dev:verbose": "nodemon --vebose --watch src/ --exec 'npm run build && npm start'  -e ts",
-    "watch-ts": "npx -p typescript tsc -w && npm run copy-files",
-    "build": "npx -p typescript tsc --build && npm run copy-files",
+    "watch-ts": "tsc -w && npm run copy-files",
+    "build": "tsc && npm run copy-files",
     "clean": "rimraf ./dist",
     "test": "cypress open",
     "copy-files": "copyfiles -u 1 './src/views/template/*.html' './src/views/template/*.pug' ./dist"
