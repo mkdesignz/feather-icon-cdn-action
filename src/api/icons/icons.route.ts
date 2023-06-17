@@ -3,4 +3,5 @@ import { IconsController } from './icons.controller';
 export const iconsRoute = Router();
 const iconsController = new IconsController();
 
-iconsRoute.get('/:iconsName', iconsController.get);
+iconsRoute.get('/', iconsController.getAllIcons)
+iconsRoute.get('/:iconsName', iconsController.getSingleIcon);

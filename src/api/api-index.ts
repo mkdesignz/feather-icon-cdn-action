@@ -5,5 +5,3 @@ import { iconsRoute } from './icons/icons.route';
 export const api = express();
 
 api.use('/icons', iconsRoute);
-
-api.use(notFound);
