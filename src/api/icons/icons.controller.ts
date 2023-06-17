@@ -6,16 +6,19 @@ export class IconsController {
   constructor() {}
 
   public get(req: Request, res: Response): unknown {
-    const { iconName} = req.params;
-
+    const { iconsName} = req.params;
     try {
-      const icon = icons[iconName].toSvg();
-      console.log(icon)
+      const icon = icons[iconsName].toSvg();
       return res
         .header("Content-Type","image/svg+xml")
         .send(icon);
     } catch (e) {
-      return res.status(404);
+      return res.status(404).send({
+        error: {
+          message: "Icon Doesn't exist",
+          status: 404
+        }
+      });
     }
   }
 }
