@@ -13,9 +13,10 @@ const apiLimiter = rateLimit({
 })
 const app = express();
 app.use(environment);
+app.use('/assets', express.static('public/assets'));
 const server = new http.Server(app);
 app.use(apiLimiter);
-app.use('/', api);
+app.use('/api', api);
 app.set('port', variables.Server.httpPort || 3000);
 
 server.listen(app.get('port'), () => {
