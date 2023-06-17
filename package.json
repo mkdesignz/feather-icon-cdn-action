@@ -2,7 +2,7 @@
   "name": "icon-feathers-cdn",
   "version": "1.0.0",
   "description": "",
-  "main": "dist/server.js",
+  "main": "server.js",
   "scripts": {
     "start": "node dist/server.js",
     "dev": "npm run build && concurrently -k -n 'TypeScript,Node' -c 'yellow.bold,cyan.bold' 'npm run watch-ts' 'nodemon ./dist/server.js' -i true --default-input-target 1",
