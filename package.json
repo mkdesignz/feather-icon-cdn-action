@@ -1,5 +1,5 @@
 {
-  "name": "nodejs-scaffolding",
+  "name": "icon-feathers-cdn",
   "version": "1.0.0",
   "description": "",
   "main": "dist/server.js",
@@ -26,6 +26,7 @@
     "@types/express-flash": "^0.0.2",
     "@types/express-mysql-session": "^2.1.2",
     "@types/express-session": "^1.17.3",
+    "@types/feather-icons": "^4.29.1",
     "@types/helmet": "^4.0.0",
     "@types/mocha": "^8.2.1",
     "@types/mysql": "^2.15.18",
@@ -60,6 +61,7 @@
     "express-mysql-session": "^2.1.6",
     "express-rate-limit": "^6.3.0",
     "express-session": "^1.17.2",
+    "feather-icons": "^4.29.0",
     "helmet": "^4.6.0",
     "morgan": "^1.10.0",
     "mysql": "^2.18.1",
