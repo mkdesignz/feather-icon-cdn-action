@@ -1,5 +1,6 @@
 import dotenv from 'dotenv';
 import { PoolConfig } from 'mysql';
+import { Options as RateLimitOptions } from 'express-rate-limit';
 
 dotenv.config();
 
@@ -16,3 +17,8 @@ export const DataBase: PoolConfig = {
   database: process.env.DB_NAME,
   debug: false,
 };
+export const rateLimit = {
+  max: process.env.RATE_LIMIT_MAX as unknown as number,
+  windowMs: process.env.RATE_LIMIT_TIME as unknown as number,
+
+}
