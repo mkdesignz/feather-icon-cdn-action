@@ -6,7 +6,10 @@ import helmet from 'helmet';
 
 export const environment = express();
 environment.use(helmet({
-  contentSecurityPolicy: false
+  contentSecurityPolicy: false,
+  hsts: true,
+  hidePoweredBy: true,
+  noSniff: true
 }));
 switch (Server.environment) {
   case 'Development':
