@@ -1,6 +1,5 @@
 import dotenv from 'dotenv';
 import { PoolConfig } from 'mysql';
-import { Options as RateLimitOptions } from 'express-rate-limit';
 
 dotenv.config();
 
