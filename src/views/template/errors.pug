@@ -4,7 +4,5 @@ head
   meta(charset='utf-8')
   title= title
   link(href='/assets/css/main.css' rel='stylesheet')
-body
-  h1= errorCode
-  p test
-  img(alt=alt src=src style="max-width: 600px")
+body(style=`background-image: url(${src}); background-size: cover;`)#error_page
+  h1= errorCode + " - " + title

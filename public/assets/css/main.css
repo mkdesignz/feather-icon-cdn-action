@@ -1,0 +1,28 @@
+* {
+  box-sizing: border-box;
+}
+*:before, *:before {
+  box-sizing: inherit;
+}
+html {
+  font-size: 100%;
+}
+body {
+  font: 400 1.2rem/1.5 sans-serif;
+}
+#error_page {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0;
+  padding: 0;
+  height: 100vh;
+  width: 100vw;
+}
+#error_page h1 {
+  background-color: rgba(252, 252, 252, 0.75);
+  color: #282828;
+  width: fit-content;
+  width: -moz-fit-content;
+  padding: 1.75rem 2.75rem;
+}
