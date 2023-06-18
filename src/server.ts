@@ -11,6 +11,9 @@ const apiLimiter = rateLimit({
   max: variables.rateLimit.max,
   standardHeaders: true,
   legacyHeaders: false,
+  keyGenerator: (req: any , _res) => {
+    return req.headers["x-forwarded-for"] || req.socket.remoteAddress
+  }
 });
 const app = express();
 app.use(environment);
