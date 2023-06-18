@@ -17,7 +17,7 @@ export const DataBase: PoolConfig = {
   debug: false,
 };
 export const rateLimit = {
-  max: process.env.RATE_LIMIT_MAX as unknown as number,
-  windowMs: process.env.RATE_LIMIT_TIME as unknown as number,
+  max: Number.parseInt(process.env.RATE_LIMIT_MAX),
+  windowMs: Number.parseInt(process.env.RATE_LIMIT_TIME),
 
 }
