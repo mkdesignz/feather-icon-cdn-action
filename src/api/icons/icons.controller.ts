@@ -5,7 +5,9 @@ import { icons } from "feather-icons"
 export class IconsController {
   constructor() {}
 
-  public getAllIcons(_req: Request, res: Response): unknown {
+  public getAllIcons(req: Request, res: Response): unknown {
+
+    console.log(req.headers["x-forwarded-for"], req.socket.remoteAddress)
     const allIcon = []
     for (const icon in icons) {
       allIcon.push({
