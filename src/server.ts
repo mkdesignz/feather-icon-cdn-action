@@ -7,16 +7,16 @@ import { environment } from './config/environment';
 import { notFound } from './views/errors/404';
 
 const apiLimiter = rateLimit({
-  windowMs: variables.rateLimit.windowMs, // 15 minutes
-  max: variables.rateLimit.max, // Limit each IP to 100 requests per `window` (here, per 15 minutes)
-  standardHeaders: true, // Return rate limit info in the `RateLimit-*` headers
-  legacyHeaders: false, // Disable the `X-RateLimit-*` headers
+  windowMs: variables.rateLimit.windowMs,
+  max: variables.rateLimit.max,
+  standardHeaders: true,
+  legacyHeaders: false,
 });
 const app = express();
 app.use(environment);
 app.use('/assets', express.static('public/assets'));
-const server = new http.Server(app);
 app.use(apiLimiter);
+const server = new http.Server(app);
 app.use('/api', api);
 app.use(notFound);
 app.set('port', variables.Server.httpPort || 3000);
