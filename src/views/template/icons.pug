@@ -1,0 +1,15 @@
+<!Doctype html>
+html
+  head
+    meta(charset='utf-8')
+    title= title
+    link(href='/assets/css/main.css' rel='stylesheet')
+  body
+    div(style='display: flex; flex-wrap: wrap;')
+      each icon in icons
+        div.icon(data-url=`${icon.url}`)
+          img(src=`${icon.svg}`)
+          p #{icon.name}
+          input(type='color' value=`${icon.color}`)
+          input(type='number' value=`${icon.size}`)
+    script(src='/assets/scripts/icons.js')

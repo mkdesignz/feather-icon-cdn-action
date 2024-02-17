@@ -5,6 +5,7 @@ import { api } from './api/api-index';
 import * as variables from './config/variables';
 import { environment } from './config/environment';
 import { notFound } from './views/errors/404';
+import { iconsView } from './views/icons/icons';
 
 const apiLimiter = rateLimit({
   windowMs: variables.rateLimit.windowMs,
@@ -21,6 +22,7 @@ app.use('/assets', express.static('public/assets'));
 app.use(apiLimiter);
 const server = new http.Server(app);
 app.use('/api', api);
+app.use('/icons', iconsView);
 app.use(notFound);
 app.set('port', variables.Server.httpPort || 3000);
 
