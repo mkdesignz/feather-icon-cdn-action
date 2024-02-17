@@ -4,8 +4,39 @@ html
     meta(charset='utf-8')
     title= title
     link(href='/assets/css/main.css' rel='stylesheet')
+    style.
+      .icon {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin: 10px;
+        background: #fff;
+        border: 1px solid #ccc;
+        padding: 10px;
+        border-radius: 5px;
+        position: relative;
+        width: 98%;
+        transition: background-color 0.3s ease-in-out;
+        &:hover {
+          background-color: #cbfff8;
+        }
+      }
+      @media screen and (min-width: 480px) {
+        .icon {
+          width: 46%;
+        }
+      }
+      @media screen and (min-width: 1024px) {
+        .icon {
+          width: 23%;
+        }
+      }
+      .icon img {
+        width: 50px;
+        height: auto;
+      }
   body
-    div(style='display: flex; flex-wrap: wrap;')
+    div(style='display: flex; flex-wrap: wrap; justify-content: center; align-items: center; width: 98%; max-width: 1024px; margin: 0 auto; padding: 10px;')
       each icon in icons
         div.icon(data-url=`${icon.url}`)
           img(src=`${icon.svg}`)
