@@ -5,11 +5,13 @@ import { production } from './enviornment/prod';
 import helmet from 'helmet';
 
 export const environment = express();
-environment.use(helmet({
-  hidePoweredBy: true,
-  noSniff: true,
-  crossOriginResourcePolicy: false // todo: make an actual policy
-}));
+environment.use(
+  helmet({
+    hidePoweredBy: true,
+    noSniff: true,
+    crossOriginResourcePolicy: false, // todo: make an actual policy
+  })
+);
 switch (Server.environment) {
   case 'Development':
   case 'development':

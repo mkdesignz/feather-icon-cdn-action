@@ -12,7 +12,8 @@
     "build": "tsc --build && npm run copy-files",
     "clean": "rimraf ./dist",
     "test": "cypress open",
-    "copy-files": "copyfiles -u 1 './src/views/template/*.html' './src/views/template/*.pug' ./dist"
+    "copy-files": "copyfiles -u 1 './src/views/template/*.html' './src/views/template/*.pug' ./dist",
+    "format": "prettier --write ."
   },
   "author": "Manuel Osorio",
   "license": "MIT",
@@ -64,6 +65,7 @@
     "helmet": "^7.0.0",
     "morgan": "^1.10.0",
     "mysql": "^2.18.1",
+    "posthog-js": "^1.186.1",
     "pug": "^3.0.3"
   }
 }
