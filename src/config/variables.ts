@@ -19,5 +19,12 @@ export const DataBase: PoolConfig = {
 export const rateLimit = {
   max: Number.parseInt(process.env.RATE_LIMIT_MAX),
   windowMs: Number.parseInt(process.env.RATE_LIMIT_TIME),
+};
 
-}
+export const posthog: {
+  public_key: string;
+  person_profiles: any;
+} = {
+  public_key: process.env.POSTHOG_PUBLIC_KEY,
+  person_profiles: process.env.POSTHOG_PERSON_PROFILES,
+};
