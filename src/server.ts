@@ -7,15 +7,16 @@ import { environment } from './config/environment';
 import { notFound } from './views/errors/404';
 import { iconsView } from './views/icons/icons';
 import helmet from 'helmet';
+import posthog from 'posthog-js';
 
 const apiLimiter = rateLimit({
   windowMs: variables.rateLimit.windowMs,
   max: variables.rateLimit.max,
   standardHeaders: true,
   legacyHeaders: false,
-  keyGenerator: (req: any , _res) => {
-    return req.headers["x-forwarded-for"] || req.socket.remoteAddress
-  }
+  keyGenerator: (req: any, _res) => {
+    return req.headers['x-forwarded-for'] || req.socket.remoteAddress;
+  },
 });
 const app = express();
 
@@ -26,6 +27,18 @@ const cspOptions = {
     // Add other directives as needed
   },
 };
+posthog.init(variables.posthog.public_key, {
+  api_host: 'https://us.i.posthog.com',
+  person_profiles: variables.posthog.person_profiles,
+});
+
+app.use((req, _res, next) => {
+  posthog.capture('$pageview', {
+    distinct_id: req.headers['x-forwarded-for'] || req.socket.remoteAddress,
+    page: req.originalUrl,
+  });
+  next();
+});
 
 app.use(environment);
 app.use(helmet.contentSecurityPolicy(cspOptions));

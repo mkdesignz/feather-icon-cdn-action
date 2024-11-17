@@ -10,10 +10,11 @@ function updateDataUrl(element, color, number) {
   }
 
   // Construct the new URL with updated query parameters
-  const updatedUrl = `${baseUrl}?color=${encodeURIComponent(color)}&size=${number}`;
+  const updatedUrl = `${baseUrl}?color=${encodeURIComponent(
+    color
+  )}&size=${number}`;
   element.setAttribute('data-url', updatedUrl);
 }
-
 
 // Function to display a message
 function showMessage(element, message) {
@@ -38,12 +39,15 @@ function showMessage(element, message) {
 
 // Function to copy the data-url to clipboard
 function copyToClipboard(text, element) {
-  navigator.clipboard.writeText(text).then(() => {
-    console.log('Data URL copied to clipboard');
-    showMessage(element, 'Copied!');
-  }).catch(err => {
-    console.error('Failed to copy: ', err);
-  });
+  navigator.clipboard
+    .writeText(text)
+    .then(() => {
+      console.log('Data URL copied to clipboard');
+      showMessage(element, 'Copied!');
+    })
+    .catch(err => {
+      console.error('Failed to copy: ', err);
+    });
 }
 
 // Add event listeners to all icon divs
@@ -53,11 +57,15 @@ document.querySelectorAll('.icon').forEach(icon => {
   const numberInput = icon.querySelector('input[type="number"]');
 
   // Update data-url when inputs change
-  colorInput.addEventListener('change', () => updateDataUrl(icon, colorInput.value, numberInput.value));
-  numberInput.addEventListener('change', () => updateDataUrl(icon, colorInput.value, numberInput.value));
+  colorInput.addEventListener('change', () =>
+    updateDataUrl(icon, colorInput.value, numberInput.value)
+  );
+  numberInput.addEventListener('change', () =>
+    updateDataUrl(icon, colorInput.value, numberInput.value)
+  );
 
   // Copy data-url to clipboard on click, excluding input clicks
-  icon.addEventListener('click', (event) => {
+  icon.addEventListener('click', event => {
     // Check if the click is on one of the inputs
     if (event.target === colorInput || event.target === numberInput) {
       // If so, do nothing (don't copy)
@@ -68,4 +76,3 @@ document.querySelectorAll('.icon').forEach(icon => {
     copyToClipboard(dataUrl, icon);
   });
 });
-

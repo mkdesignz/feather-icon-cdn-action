@@ -12,7 +12,8 @@
     "build": "tsc --build && npm run copy-files",
     "clean": "rimraf ./dist",
     "test": "cypress open",
-    "copy-files": "copyfiles -u 1 './src/views/template/*.html' './src/views/template/*.pug' ./dist"
+    "copy-files": "copyfiles -u 1 './src/views/template/*.html' './src/views/template/*.pug' ./dist",
+    "format": "prettier --write ."
   },
   "author": "Manuel Osorio",
   "license": "MIT",
@@ -55,7 +56,7 @@
     "concurrently": "^6.5.1",
     "cors": "^2.8.5",
     "dotenv": "^8.6.0",
-    "express": "^4.19.2",
+    "express": "^4.20.0",
     "express-flash": "^0.0.2",
     "express-mysql-session": "^3.0.0",
     "express-rate-limit": "^6.3.0",
@@ -64,6 +65,7 @@
     "helmet": "^8.0.0",
     "morgan": "^1.10.0",
     "mysql": "^2.18.1",
+    "posthog-js": "^1.186.1",
     "pug": "^3.0.3"
   }
 }
