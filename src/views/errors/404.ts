@@ -9,6 +9,6 @@ notFound.use((req, res) => {
     title: 'Page not found',
     errorCode: 404,
     src: 'https://images.unsplash.com/photo-1555861496-0666c8981751',
-    alt: '',
+    alt: 'Ice cream cone that was dropped.',
   });
 });

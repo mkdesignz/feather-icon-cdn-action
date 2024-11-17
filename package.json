@@ -61,7 +61,7 @@
     "express-rate-limit": "^6.3.0",
     "express-session": "^1.17.2",
     "feather-icons": "^4.29.0",
-    "helmet": "^7.0.0",
+    "helmet": "^8.0.0",
     "morgan": "^1.10.0",
     "mysql": "^2.18.1",
     "pug": "^3.0.3"
