@@ -2,28 +2,66 @@
 html
   head
     meta(charset='utf-8')
-    title= title
+    title=title
     link(href='/assets/css/main.css' rel='stylesheet')
     style.
+      p {
+        margin: 0;
+      }
+      .icon__wrapper {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        align-items: center;
+        width: 98%;
+        max-width: 1024px;
+        margin: 0 auto;
+        gap: 1.25rem;
+      }
       .icon {
         display: flex;
         flex-direction: column;
         align-items: center;
-        margin: 10px;
         background: #fff;
         border: 1px solid #ccc;
-        padding: 10px;
+        padding: 1.5rem;
         border-radius: 5px;
         position: relative;
         width: 98%;
         transition: background-color 0.3s ease-in-out;
+        gap: 0.5rem;
         &:hover {
-          background-color: #cbfff8;
+          background-color: rgba(85, 142, 225, 0.32);
         }
+      }
+      .icon img {
+        height: auto;
+        width: clamp(0.75rem, 45%, 2rem);
+      }
+      .icon__controls {
+        display: flex;
+        justify-content: space-between;
+        width: 100%;
+        margin-top: 0.5rem;
+        flex-direction: column;
+        gap: 0.5rem;
+        /*padding: 1rem 1.5rem;*/
+      }
+      .icon__size {
+        text-align: center;
       }
       @media screen and (min-width: 480px) {
         .icon {
           width: 46%;
+        }
+        .icon__controls {
+          flex-direction: row;
+        }
+        .icon__color {
+          width: 75%;
+        }
+        .icon__size {
+          width: 25%;
         }
       }
       @media screen and (min-width: 1024px) {
@@ -31,16 +69,13 @@ html
           width: 23%;
         }
       }
-      .icon img {
-        width: 50px;
-        height: auto;
-      }
   body
-    div(style='display: flex; flex-wrap: wrap; justify-content: center; align-items: center; width: 98%; max-width: 1024px; margin: 0 auto; padding: 10px;')
+    div.icon__wrapper
       each icon in icons
         div.icon(data-url=`${icon.url}`)
           img(src=`${icon.svg}`)
           p #{icon.name}
-          input(type='color' value=`${icon.color}`)
-          input(type='number' value=`${icon.size}`)
+          div.icon__controls
+            input(type='color' value=`${icon.color}`).icon__color
+            input(type='number' value=`${icon.size}`).icon__size
     script(src='/assets/scripts/icons.js')
