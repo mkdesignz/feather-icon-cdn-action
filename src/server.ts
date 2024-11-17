@@ -6,6 +6,7 @@ import * as variables from './config/variables';
 import { environment } from './config/environment';
 import { notFound } from './views/errors/404';
 import { iconsView } from './views/icons/icons';
+import helmet from 'helmet';
 
 const apiLimiter = rateLimit({
   windowMs: variables.rateLimit.windowMs,
@@ -17,7 +18,18 @@ const apiLimiter = rateLimit({
   }
 });
 const app = express();
+
+const cspOptions = {
+  directives: {
+    defaultSrc: ["'self'"],
+    imgSrc: ["'self'", "data:", "https://images.unsplash.com"],
+    // Add other directives as needed
+  },
+};
+
 app.use(environment);
+app.use(helmet.contentSecurityPolicy(cspOptions));
+
 app.use('/assets', express.static('public/assets'));
 app.use(apiLimiter);
 const server = new http.Server(app);
