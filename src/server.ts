@@ -1,12 +1,14 @@
+import { createId } from '@paralleldrive/cuid2';
 import express from 'express';
 import rateLimit from 'express-rate-limit';
 import http from 'http';
+import helmet from 'helmet';
+import { PostHog } from 'posthog-node';
 import { api } from './api/api-index';
 import * as variables from './config/variables';
 import { environment } from './config/environment';
 import { notFound } from './views/errors/404';
 import { iconsView } from './views/icons/icons';
-import posthog from 'posthog-js';
 
 const apiLimiter = rateLimit({
   windowMs: variables.rateLimit.windowMs,
@@ -19,21 +21,38 @@ const apiLimiter = rateLimit({
 });
 const app = express();
 
-posthog.init(variables.posthog.public_key, {
-  api_host: 'https://us.i.posthog.com',
-  person_profiles: variables.posthog.person_profiles,
-});
+const cspOptions = {
+  directives: {
+    defaultSrc: ["'self'"],
+    imgSrc: ["'self'", "data:", "https://images.unsplash.com"],
+  },
+};
+
+
 
 app.use((req, _res, next) => {
-  posthog.capture('$pageview', {
-    distinct_id: req.headers['x-forwarded-for'] || req.socket.remoteAddress,
-    page: req.originalUrl,
+  const client = new PostHog(
+    'phc_27ya2gRrMjahdycclUnaCtEjZw8GuwKkqzHCi64eczL',
+    { host: 'https://us.i.posthog.com' }
+  );
+
+  client.capture({
+    distinctId: createId(),
+    event: '$pageview',
+    properties: {
+      url: req.originalUrl,
+      method: req.method,
+      userAgent: req.headers['user-agent'] || 'unknown',
+      timestamp: new Date().toISOString(),
+    }
   });
-  console.log(req.headers['x-forwarded-for'], req.socket.remoteAddress);
+  client.shutdown();
   next();
 });
 
 app.use(environment);
+app.use(helmet.contentSecurityPolicy(cspOptions));
+
 app.use('/assets', express.static('public/assets'));
 app.use(apiLimiter);
 const server = new http.Server(app);
