@@ -2,7 +2,7 @@ import express from 'express';
 import rateLimit from 'express-rate-limit';
 import http from 'http';
 // import posthog from 'posthog-js';
-// import helmet from 'helmet';
+import helmet from 'helmet';
 import { api } from './api/api-index';
 import * as variables from './config/variables';
 import { environment } from './config/environment';
@@ -20,13 +20,13 @@ const apiLimiter = rateLimit({
 });
 const app = express();
 
-// const cspOptions = {
-//   directives: {
-//     defaultSrc: ["'self'"],
-//     imgSrc: ["'self'", "data:", "https://images.unsplash.com"],
-//     // Add other directives as needed
-//   },
-// };
+const cspOptions = {
+  directives: {
+    defaultSrc: ["'self'"],
+    imgSrc: ["'self'", "data:", "https://images.unsplash.com"],
+    // Add other directives as needed
+  },
+};
 // posthog.init(variables.posthog.public_key, {
 //   api_host: 'https://us.i.posthog.com',
 //   person_profiles: variables.posthog.person_profiles,
@@ -42,7 +42,7 @@ const app = express();
 // });
 
 app.use(environment);
-// app.use(helmet.contentSecurityPolicy(cspOptions));
+app.use(helmet.contentSecurityPolicy(cspOptions));
 
 app.use('/assets', express.static('public/assets'));
 app.use(apiLimiter);
