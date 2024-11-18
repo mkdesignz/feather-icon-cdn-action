@@ -1,8 +1,9 @@
+import { createId } from '@paralleldrive/cuid2';
 import express from 'express';
 import rateLimit from 'express-rate-limit';
 import http from 'http';
-// import posthog from 'posthog-js';
 import helmet from 'helmet';
+import { PostHog } from 'posthog-node';
 import { api } from './api/api-index';
 import * as variables from './config/variables';
 import { environment } from './config/environment';
@@ -24,22 +25,30 @@ const cspOptions = {
   directives: {
     defaultSrc: ["'self'"],
     imgSrc: ["'self'", "data:", "https://images.unsplash.com"],
-    // Add other directives as needed
   },
 };
-// posthog.init(variables.posthog.public_key, {
-//   api_host: 'https://us.i.posthog.com',
-//   person_profiles: variables.posthog.person_profiles,
-// });
 
-// app.use((req, _res, next) => {
-//   posthog.capture('$pageview', {
-//     distinct_id: req.headers['x-forwarded-for'] || req.socket.remoteAddress,
-//     page: req.originalUrl,
-//   });
-//   console.log(req.headers['x-forwarded-for'], req.socket.remoteAddress);
-//   next();
-// });
+
+
+app.use((req, _res, next) => {
+  const client = new PostHog(
+    'phc_27ya2gRrMjahdycclUnaCtEjZw8GuwKkqzHCi64eczL',
+    { host: 'https://us.i.posthog.com' }
+  );
+
+  client.capture({
+    distinctId: createId(),
+    event: '$pageview',
+    properties: {
+      url: req.originalUrl,
+      method: req.method,
+      userAgent: req.headers['user-agent'] || 'unknown',
+      timestamp: new Date().toISOString(),
+    }
+  });
+  client.shutdown();
+  next();
+});
 
 app.use(environment);
 app.use(helmet.contentSecurityPolicy(cspOptions));
