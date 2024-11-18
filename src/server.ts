@@ -40,10 +40,9 @@ app.use((req, _res, next) => {
     distinctId: createId(),
     event: '$pageview',
     properties: {
-      url: req.originalUrl,
-      method: req.method,
-      userAgent: req.headers['user-agent'] || 'unknown',
-      timestamp: new Date().toISOString(),
+      $current_url: req.originalUrl,
+      $referrer: req.headers.referer,
+      $referring_domain: req.headers.referer ? new URL(req.headers.referer).hostname : null,
     }
   });
   client.shutdown();
