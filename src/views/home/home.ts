@@ -11,7 +11,7 @@ home.get('/', (req, res) => {
     return res.render('layout', {
       title: 'Lighthouse Images | Home',
       img: 'https://images.unsplash.com/photo-1504389557830-b293439b92d0',
-      alt: 'Ice cream cone that was dropped.',
+      alt: '',
     });
   } catch (e) {
     return console.log(chalk.red(e.errMessage));
