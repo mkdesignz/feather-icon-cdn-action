@@ -69,44 +69,37 @@ html
           width: 23%;
         }
       }
+    script(src="https://unpkg.com/posthog-js" async defer)
     script.
-      (function() {
-        var script = document.createElement('script');
-        script.src = 'https://unpkg.com/posthog-js';
-        script.async = true;
-        script.onload = function() {
-          // Initialize PostHog
-          posthog.init(posthog_public_key, {
-            api_host: 'https://us.i.posthog.com',
-            persistence: 'memory', // Use memory if cookies are restricted
-          });
+      // Initialize PostHog
+      posthog.init("#{posthog_public_key}", {
+        api_host: 'https://us.i.posthog.com',
+        persistence: 'memory', // Use memory if cookies are restricted
+      });
 
-          // Optionally enable session recording
-          posthog.startSessionRecording();
+      // Optionally enable session recording
+      posthog.startSessionRecording();
 
-          // Track $pageview event
-          posthog.capture('$pageview', {
+      // Track $pageview event
+      posthog.capture('$pageview', {
+        $current_url: window.location.href,
+        $referrer: document.referrer,
+      });
+
+      // Track $pageleave events
+      window.addEventListener('beforeunload', () => {
+        posthog.capture('$pageleave', {
+          $current_url: window.location.href,
+        });
+      });
+
+      document.addEventListener('visibilitychange', () => {
+        if (document.visibilityState === 'hidden') {
+          posthog.capture('$pageleave', {
             $current_url: window.location.href,
-            $referrer: document.referrer,
           });
-
-          // Track $pageleave event
-          window.addEventListener('beforeunload', () => {
-            posthog.capture('$pageleave', {
-              $current_url: window.location.href,
-            });
-          });
-
-          document.addEventListener('visibilitychange', () => {
-            if (document.visibilityState === 'hidden') {
-              posthog.capture('$pageleave', {
-                $current_url: window.location.href,
-              });
-            }
-          });
-        };
-        document.head.appendChild(script);
-      })();
+        }
+      });
   body
     div.icon__wrapper
       each icon in icons
