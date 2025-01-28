@@ -32,19 +32,19 @@ const cspOptions = {
 
 app.use((req, _res, next) => {
   const client = new PostHog(
-    'phc_27ya2gRrMjahdycclUnaCtEjZw8GuwKkqzHCi64eczL',
+    variables.posthog.public_key,
     { host: 'https://us.i.posthog.com' }
   );
 
   client.capture({
     distinctId: createId(),
-    event: '$pageview',
+    event: '$server_event',
     properties: {
       $current_url: req.originalUrl,
       $referrer: req.headers.referer,
-      $referring_domain: req.headers.referer ? new URL(req.headers.referer).hostname : null,
     }
   });
+
   client.shutdown();
   next();
 });
