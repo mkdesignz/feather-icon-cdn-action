@@ -1,6 +1,7 @@
 import express from 'express';
 import path from 'path';
 import chalk from 'chalk';
+import { posthog } from '../../config/variables';
 
 export const home = express();
 
@@ -12,6 +13,7 @@ home.get('/', (req, res) => {
       title: 'Lighthouse Images | Home',
       img: 'https://images.unsplash.com/photo-1504389557830-b293439b92d0',
       alt: '',
+      posthog_public_key: posthog.public_key
     });
   } catch (e) {
     return console.log(chalk.red(e.errMessage));
