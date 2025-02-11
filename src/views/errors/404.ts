@@ -10,6 +10,6 @@ notFound.use((req, res) => {
     errorCode: 404,
     src: 'https://images.unsplash.com/photo-1555861496-0666c8981751',
     alt: 'Ice cream cone that was dropped.',
-    posthog_public_key: posthog.public_key
+    posthog_public_key: posthog.public_key,
   });
 });

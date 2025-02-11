@@ -24,27 +24,21 @@ const app = express();
 const cspOptions = {
   directives: {
     defaultSrc: ["'self'"],
-    imgSrc: ["'self'", "data:", "https://images.unsplash.com"],
+    imgSrc: ["'self'", 'data:', 'https://images.unsplash.com'],
     scriptSrc: [
       "'self'",
       "'unsafe-inline'",
-      "https://us-assets.i.posthog.com",
-      "https://us.i.posthog.com"
+      'https://us-assets.i.posthog.com',
+      'https://us.i.posthog.com',
     ],
-    connectSrc: [
-      "'self'",
-      "https://us.i.posthog.com",
-    ],
+    connectSrc: ["'self'", 'https://us.i.posthog.com'],
   },
 };
 
-
-
 app.use((req, _res, next) => {
-  const client = new PostHog(
-    variables.posthog.public_key,
-    { host: 'https://us.i.posthog.com' }
-  );
+  const client = new PostHog(variables.posthog.public_key, {
+    host: 'https://us.i.posthog.com',
+  });
 
   client.capture({
     distinctId: createId(),
@@ -52,7 +46,7 @@ app.use((req, _res, next) => {
     properties: {
       $current_url: req.originalUrl,
       $referrer: req.headers.referer,
-    }
+    },
   });
 
   client.shutdown();
