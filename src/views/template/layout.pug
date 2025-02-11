@@ -12,7 +12,7 @@ html(lang="en")
         height: 100%;
         margin: 0;
       }
-    script(src="https://unpkg.com/posthog-js" async defer)
+    script(src='/assets/scripts/post-hog.js')
     script.
       // Initialize PostHog
       posthog.init("#{posthog_public_key}", {

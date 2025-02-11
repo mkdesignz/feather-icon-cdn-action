@@ -25,6 +25,16 @@ const cspOptions = {
   directives: {
     defaultSrc: ["'self'"],
     imgSrc: ["'self'", "data:", "https://images.unsplash.com"],
+    scriptSrc: [
+      "'self'",
+      "'unsafe-inline'",
+      "https://us-assets.i.posthog.com",
+      "https://us.i.posthog.com"
+    ],
+    connectSrc: [
+      "'self'",
+      "https://us.i.posthog.com",
+    ],
   },
 };
 
