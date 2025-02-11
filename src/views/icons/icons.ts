@@ -32,7 +32,7 @@ iconsView.get('/', (req, res) => {
     return res.render('icons', {
       title: 'All Icons',
       icons: iconList,
-      posthog_public_key: posthog.public_key
+      posthog_public_key: posthog.public_key,
     });
   } catch (e) {
     return console.log(chalk.red(e.message));
