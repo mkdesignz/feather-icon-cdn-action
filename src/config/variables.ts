@@ -1,7 +1,9 @@
-import dotenv from 'dotenv';
-import { PoolConfig } from 'mysql';
+import { config } from 'dotenv';
 
-dotenv.config();
+config({
+  debug: process.env.NODE_ENV !== 'production',
+  encoding: 'utf8',
+})
 
 export const Server = {
   httpPort: process.env.HTTP_PORT,
@@ -9,22 +11,15 @@ export const Server = {
   environment: process.env.NODE_ENV,
 };
 
-export const DataBase: PoolConfig = {
-  host: process.env.DB_URL,
-  user: process.env.DB_USER,
-  password: process.env.DB_PASSWORD,
-  database: process.env.DB_NAME,
-  debug: false,
-};
 export const rateLimit = {
-  max: Number.parseInt(process.env.RATE_LIMIT_MAX),
-  windowMs: Number.parseInt(process.env.RATE_LIMIT_TIME),
+  max: Number.parseInt(process.env.RATE_LIMIT_MAX ?? '100'),
+  windowMs: Number.parseInt(process.env.RATE_LIMIT_TIME ?? `${15 * 60 * 1000}`),
 };
 
 export const posthog: {
-  public_key: string;
-  person_profiles: any;
+  publicKey: string;
+  personProfiles: string;
 } = {
-  public_key: process.env.POSTHOG_PUBLIC_KEY,
-  person_profiles: process.env.POSTHOG_PERSON_PROFILES,
+  publicKey: process.env.POSTHOG_PUBLIC_KEY as string,
+  personProfiles: process.env.POSTHOG_PERSON_PROFILES as 'identified_only' ? 'identified_only' : 'always',
 };

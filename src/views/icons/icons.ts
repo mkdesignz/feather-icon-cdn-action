@@ -1,18 +1,27 @@
 import express from 'express';
 import chalk from 'chalk';
-import { icons } from 'feather-icons';
+import { icons, FeatherIcon } from 'feather-icons';
 import path from 'path';
 export const iconsView = express();
 import { posthog } from '../../config/variables';
+import { __dirname } from '../../helpers/directory';
 
-iconsView.set('views', path.join(__dirname, '../template/'));
+iconsView.set('views', path.join(__dirname, 'views/template'));
 iconsView.set('view engine', 'pug');
 
-const iconList = [];
+const iconList: {
+  name: string;
+  svg: string;
+  color: string;
+  size: number;
+  url: string;
+}[] = [];
+
 for (const icon in icons) {
+  const featherIcon: FeatherIcon = icons[icon as keyof typeof icons];
   iconList.push({
     name: icon,
-    svg: `data:image/svg+xml;base64,${Buffer.from(icons[icon].toSvg()).toString(
+    svg: `data:image/svg+xml;base64,${Buffer.from(featherIcon.toSvg()).toString(
       'base64'
     )}`,
     color: '#000000',
@@ -32,9 +41,9 @@ iconsView.get('/', (req, res) => {
     return res.render('icons', {
       title: 'All Icons',
       icons: iconList,
-      posthog_public_key: posthog.public_key,
+      posthogPublicKey: posthog.publicKey,
     });
   } catch (e) {
-    return console.log(chalk.red(e.message));
+    return console.log(chalk.red(e));
   }
 });

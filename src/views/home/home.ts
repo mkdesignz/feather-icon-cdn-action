@@ -2,10 +2,11 @@ import express from 'express';
 import path from 'path';
 import chalk from 'chalk';
 import { posthog } from '../../config/variables';
+import { __dirname } from '../../helpers/directory';
 
 export const home = express();
 
-home.set('views', path.join(__dirname, '../template/'));
+home.set('views', path.join(__dirname, 'views/template'));
 home.set('view engine', 'pug');
 home.get('/', (req, res) => {
   try {
@@ -13,9 +14,9 @@ home.get('/', (req, res) => {
       title: 'Lighthouse Images | Home',
       img: 'https://images.unsplash.com/photo-1504389557830-b293439b92d0',
       alt: '',
-      posthog_public_key: posthog.public_key,
+      posthogPublicKey: posthog.publicKey,
     });
   } catch (e) {
-    return console.log(chalk.red(e.errMessage));
+    return console.log(chalk.red(e));
   }
 });
