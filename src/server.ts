@@ -20,7 +20,6 @@ const apiLimiter = rateLimit({
   },
 });
 const app = express();
-
 const cspOptions = {
   directives: {
     defaultSrc: ["'self'"],
@@ -36,7 +35,7 @@ const cspOptions = {
 };
 
 app.use((req, _res, next) => {
-  const client = new PostHog(variables.posthog.public_key, {
+  const client = new PostHog(variables.posthog.publicKey, {
     host: 'https://us.i.posthog.com',
   });
 

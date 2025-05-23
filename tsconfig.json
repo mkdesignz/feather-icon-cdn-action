@@ -1,11 +1,11 @@
 {
   "compilerOptions": {
-    "module": "CommonJS",
+    "target": "ES2022",
+    "moduleResolution": "node",
     "esModuleInterop": true,
-    "target": "es2017",
-    "moduleResolution": "Node",
-    "sourceMap": true,
-    "outDir": "dist",
+    "module": "ESNext",
+    "types": [],
+    "outDir": "./dist",
   },
   "lib": ["es2015"],
   "include": [
