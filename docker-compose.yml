@@ -1,0 +1,18 @@
+version: '3.8'
+
+services:
+  feather-icons:
+    image: themanuelosorio/feather-icons-cdn
+    container_name: feather-icons
+    environment:
+      - HTTP_PORT=${HTTP_PORT}
+      - APP_URL=${APP_URL}
+      - NODE_ENV=production
+      - RATE_LIMIT_TIME=${RATE_LIMIT_TIME}
+      - RATE_LIMIT_MAX=${RATE_LIMIT_MAX}
+      - POSTHOG_PUBLIC_KEY=${POSTHOG_PUBLIC_KEY}
+      - POSTHOG_PERSON_PROFILES=${POSTHOG_PERSON_PROFILES}
+    ports:
+      - '3000:${HTTP_PORT}'
+    restart: always
+
