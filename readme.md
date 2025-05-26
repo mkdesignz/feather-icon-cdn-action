@@ -1,38 +1,67 @@
-# NodeJS Project Scaffolding
+# Feather Icons CDN
 
-This repo will help quickly setup a NodeJS/Express/MySQL project including example files. 
+[Feather Icons](https://feathericons.com/) is a collection I frequently use across my projects. When working on a project that didn’t support npm, I needed a simple way to include icons without manual downloads. This Express app serves Feather Icons, making them easy to use in any project via a direct URL.
 
-## Installation
+**Live site:** [https://feather-icons.manuelosor.io/icons](https://feather-icons.manuelosor.io/icons)
+
+
+
+![Screenshot](demo-screenshot.png)
+
+## Example
+
+```html
+<img src='https://feather-icons.manuelosor.io/api/icons/align-left?color=%23bf3131&size=30' alt='align-left icon' />
+```
+
+<img src='https://feather-icons.manuelosor.io/api/icons/align-left?color=%23bf3131&size=30' alt='align-left icon' />
+
+---
+
+## 🚀 Installation
+
+Clone the repo and install dependencies:
 
 ```bash
-git clone https://github.com/manuelosorio/nodejs-scaffolding.git <project-name> && cd <project-name> && yarn install
+git clone https://github.com/manuelosorio/feather-icon-cdn.git <project-name>
+cd <project-name>
+yarn install
 ```
-## Usage
-'yarn' can be replaced with 'npm run'
-### Build:
+
+> You can replace `yarn` with `npm` if preferred.
+
+---
+
+## 📦 Usage
+
+### Build the project
+
 ```bash
 yarn build
 ```
-____
+
+### Clean build (removes `dist` before building)
+
 ```bash
 yarn build:clean
 ```
-Cleans dist folder before building out project
-### Running: 
+
+---
+
+### Run in development mode
+
+Starts the development server with `nodemon` and `tsup` watching:
+
 ```bash
 yarn dev
 ```
-Runs nodemon concurrently with tsc watcher
-____
-```bash
-yarn dev:verbose
-```
-Run tsc through nodemon with the verbose flag
-____
-### Clean Build File
+
+---
+
+### Clean the build directory
+
 ```bash
 yarn clean
 ```
-Cleans dist folder
 
-____
+---
