@@ -6,7 +6,7 @@ export class IconsController {
   }
 
   public getAllIcons = (req: Request, res: Response): void => {
-    console.log(req.headers['x-forwarded-for'], req.socket.remoteAddress);
+    console.log("'Client IP: %s, Remote Address: %s'", req.headers['x-forwarded-for'], req.socket.remoteAddress);
     const allIcon = [];
     for (const icon in icons) {
       const featherIcon: FeatherIcon = icons[icon as keyof typeof icons];
