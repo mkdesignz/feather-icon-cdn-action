@@ -15,7 +15,10 @@
     "clean": "rimraf ./dist",
     "test": "cypress open",
     "copy-files": "copyfiles -u 1 './src/views/template/*.html' './src/views/template/*.pug' ./dist",
-    "format": "prettier --write ."
+    "format": "prettier --write .",
+    "patch": "yarn version --patch && git push && git push --tags",
+    "minor": "yarn version --minor && git push && git push --tags",
+    "major": "yarn version --major && git push && git push --tags"
   },
   "author": "Manuel Osorio",
   "license": "MIT",
