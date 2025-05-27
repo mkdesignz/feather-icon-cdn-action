@@ -63,7 +63,7 @@ function searchIcons(query) {
   icons.forEach(icon => {
     const name = icon.getAttribute('data-name').toLowerCase();
     if (filter === '' || name.includes(filter)) {
-      icon.style.display = 'inline-block';
+      icon.style.display = 'flex';
     } else {
       icon.style.display = 'none';
     }
