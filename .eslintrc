@@ -21,5 +21,14 @@
     "@typescript-eslint/no-explicit-any": ["warn"],
     "prefer-const": "warn",
     "camelcase": "warn"
-  }
+  },
+  "overrides": [
+    {
+      "files": ["public/**/*.js"],
+      "env": {
+        "browser": true,
+        "node": false
+      }
+    }
+  ]
 }
