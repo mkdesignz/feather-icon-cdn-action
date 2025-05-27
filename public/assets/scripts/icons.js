@@ -1,24 +1,19 @@
-// Function to update the data-url attribute
-// Function to update the data-url attribute
+'use strict';
+
 function updateDataUrl(element, color, number) {
-  // Extract the base URL (without query parameters)
   let baseUrl = element.getAttribute('data-url');
   const queryIndex = baseUrl.indexOf('?');
   if (queryIndex >= 0) {
-    // If there are existing query parameters, remove them
     baseUrl = baseUrl.substring(0, queryIndex);
   }
 
-  // Construct the new URL with updated query parameters
   const updatedUrl = `${baseUrl}?color=${encodeURIComponent(
     color
   )}&size=${number}`;
   element.setAttribute('data-url', updatedUrl);
 }
 
-// Function to display a message
 function showMessage(element, message) {
-  // eslint-disable-next-line no-undef
   const messageDiv = document.createElement('div');
   messageDiv.textContent = message;
   messageDiv.style.position = 'absolute';
@@ -34,10 +29,15 @@ function showMessage(element, message) {
 
   setTimeout(() => {
     element.removeChild(messageDiv);
-  }, 1500); // Remove the message after 1.5 seconds
+  }, 1500);
 }
 
-// Function to copy the data-url to clipboard
+/**
+ *
+ * Copies the data URL to the clipboard.
+ * @param text {string} The data URL to copy.
+ * @param element {HTMLElement} The element to show the message on.
+ */
 function copyToClipboard(text, element) {
   navigator.clipboard
     .writeText(text)
@@ -50,13 +50,32 @@ function copyToClipboard(text, element) {
     });
 }
 
-// Add event listeners to all icon divs
-// Add event listeners to all icon divs
+/**
+ * Searches icons based on the provided query.
+ * @param query {string} The search query to filter icons by name.
+ */
+function searchIcons(query) {
+  /** @type {string} */
+  const filter = query.toLowerCase();
+  /** @type {NodeListOf<HTMLElement>} */
+  const icons = document.querySelectorAll('.icon');
+
+  icons.forEach(icon => {
+    const name = icon.getAttribute('data-name').toLowerCase();
+    if (filter === '' || name.includes(filter)) {
+      icon.style.display = 'inline-block';
+    } else {
+      icon.style.display = 'none';
+    }
+  });
+}
+
 document.querySelectorAll('.icon').forEach(icon => {
+  /** @type {HTMLInputElement} */
   const colorInput = icon.querySelector('input[type="color"]');
+  /** @type {HTMLInputElement} */
   const numberInput = icon.querySelector('input[type="number"]');
 
-  // Update data-url when inputs change
   colorInput.addEventListener('change', () =>
     updateDataUrl(icon, colorInput.value, numberInput.value)
   );
@@ -64,15 +83,18 @@ document.querySelectorAll('.icon').forEach(icon => {
     updateDataUrl(icon, colorInput.value, numberInput.value)
   );
 
-  // Copy data-url to clipboard on click, excluding input clicks
   icon.addEventListener('click', event => {
-    // Check if the click is on one of the inputs
     if (event.target === colorInput || event.target === numberInput) {
-      // If so, do nothing (don't copy)
       return;
     }
 
     const dataUrl = icon.getAttribute('data-url');
     copyToClipboard(dataUrl, icon);
   });
+});
+
+document.querySelector('.search-bar input').addEventListener('input', event => {
+  /** @type {string} */
+  const query = event.target.value;
+  searchIcons(query);
 });
