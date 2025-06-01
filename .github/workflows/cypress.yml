@@ -23,7 +23,7 @@ jobs:
       - name: Cypress run
         uses: cypress-io/github-action@v6
         with:
-          start: yarn start
+          start: yarn build && yarn start
           wait-on: 'http://localhost:${{ secrets.HTTP_PORT }}'
           record: true
           parallel: true
