@@ -18,7 +18,7 @@ jobs:
         with:
           node-version: 22
           cache: 'yarn'
-          cache-dependency-path: ./feather-icon-cdn-action/yarn.lock
+          cache-dependency-path: ./yarn.lock
       - name: Checkout
         uses: actions/checkout@v4
       - name: Cypress run
