@@ -23,10 +23,19 @@ jobs:
         with:
           node-version: 22
           cache: 'yarn'
+      - name: Run tsup
+        run: npx tsup
+      - name: Copy view templates if they exist
+        run: |
+          if ls src/views/template/*.html src/views/template/*.pug > /dev/null 2>&1; then
+            npx copyfiles -u 1 'src/views/template/*.html' 'src/views/template/*.pug' dist
+          else
+            echo "No templates to copy"
+          fi
       - name: Cypress run
         uses: cypress-io/github-action@v6
         with:
-          start: yarn build && yarn start
+          start: yarn start
           wait-on: 'http://localhost:${{ secrets.HTTP_PORT }}'
           record: true
           parallel: true
