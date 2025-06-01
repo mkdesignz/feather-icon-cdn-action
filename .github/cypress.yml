@@ -1,8 +1,10 @@
 name: Cypress Tests
-on: [push, pull_request]
-branches:
-  only:
-    - master
+on:
+  push:
+    branches: [master]
+  pull_request:
+    branches: [master]
+
 jobs:
   cypress-run:
     runs-on: ubuntu-latest
@@ -17,9 +19,12 @@ jobs:
         uses: cypress-io/github-action@v6
         with:
           start: npm start
-          wait-on: 'http://localhost:3000'
+          wait-on: 'http://localhost:${{ secrets.HTTP_PORT }}'
           record: true
           parallel: true
         env:
           CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          HTTP_PORT: ${{ secrets.HTTP_PORT }}
+          RATE_LIMIT_MAX: ${{ secrets.RATE_LIMIT_MAX }}
+          RATE_LIMIT_TIME: ${{ secrets.RATE_LIMIT_TIME }}
