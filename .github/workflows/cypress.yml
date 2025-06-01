@@ -12,9 +12,6 @@ jobs:
       fail-fast: false
       matrix:
         containers: [1, 2]
-    defaults:
-      run:
-        working-directory: feather-icon-cdn
     steps:
       - name: Checkout
         uses: actions/checkout@v4
